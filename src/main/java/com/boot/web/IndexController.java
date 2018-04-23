@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.service.UserService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @Controller
 @RequestMapping("/index")
 public class IndexController {
@@ -36,7 +39,10 @@ public class IndexController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/user",method = RequestMethod.GET)
 	@ResponseBody //如果需要返回json或者xml或者自定义mediaType内容到页面，则需要在对应的方法上加上@ResponseBody注解
-	public Map getUserInfo(@RequestParam int userId) {//获取json对象用RequestBody
+	@ApiOperation(value = "测试接口",notes = "这个接口通过输入一个用户ID，返回用户名信息")
+	public Map getUserInfo(
+			@ApiParam(value = "用户ID")
+			@RequestParam int userId) {//获取json对象用RequestBody
 		System.out.println(userId);
 		String userName = userService.selectUserById(userId).getUserName();
 		Map jsonData = new HashMap();
@@ -44,7 +50,8 @@ public class IndexController {
 		return jsonData;
 	}
 	
-	@RequestMapping(value="/test")
+	@RequestMapping(value="/test",method = RequestMethod.GET)
+	@ApiOperation(value = "测试接口",notes = "仅仅是测试")
     public String test() {
 		System.out.println("a");
         return "xxx";

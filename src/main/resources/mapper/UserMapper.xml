@@ -9,7 +9,7 @@
  	</resultMap> 
  	<!-- 查询单条记录 --> 
  	<select id="selectUserById" parameterType="int" resultMap="BaseResultMap"> 
- 		SELECT * FROM t_user WHERE user_id = #{userId} 
+ 		SELECT * FROM user WHERE user_id = #{userId} 
  	</select> 
 </mapper> 
 
