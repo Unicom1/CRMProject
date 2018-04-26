@@ -3,14 +3,19 @@ package com.boot.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-
+import com.boot.WebSecurityConfig;
 import com.boot.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -20,21 +25,33 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/index")
 public class IndexController {
 	private static final String INDEX = "index";
+	private static final String LOGIN = "login";
 	
 	@Autowired
 	private UserService userService;
 	
-/*	@RequestMapping(value="/show",method = RequestMethod.GET)
-    public ModelAndView  getIndex() {
-        //return INDEX;
-		ModelAndView mv = new ModelAndView("index"); 
-        return mv;
-    }*/
-	
-	@RequestMapping(value="/show",method = RequestMethod.GET)
+
+	@RequestMapping(value="/show")
     public String  getIndex() {
         return INDEX;
     }
+	@RequestMapping(value="/login")
+    public String login() {
+        return LOGIN;
+    }
+	
+	//注销登录，消除session
+	@RequestMapping(value="/logout")
+	public String logout() {
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		 HttpSession session = request.getSession();
+		session.removeAttribute(WebSecurityConfig.SESSION_USERNAME);
+		session.removeAttribute(WebSecurityConfig.SESSION_AUTHOR);
+		session.removeAttribute(WebSecurityConfig.SESSION_DEPARTMENT);
+		return "redirect:/index/login";
+		
+	}
+
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/user",method = RequestMethod.GET)
@@ -54,6 +71,6 @@ public class IndexController {
 	@ApiOperation(value = "测试接口",notes = "仅仅是测试")
     public String test() {
 		System.out.println("a");
-        return "xxx";
+        return "test";
     }
 }

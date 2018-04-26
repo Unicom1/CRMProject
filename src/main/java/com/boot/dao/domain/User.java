@@ -1,23 +1,24 @@
 package com.boot.dao.domain;
 
 public class User {
-	private Integer userId;
+	private Integer id;
 	private String userName;
 	private String userPassword;
-	private String userAuthor;
-	private String userDepartment;
-	private String userSex;
+	private Integer userAuthor;
+	private Integer userDepartment;
+	private Integer userSex;
 	private String userPhone;
 	private String userEmail;
 	private String userAddress;
 	private String userHead;
 	
-	public Integer getUserId() {
-		return userId;
+	public Integer getId() {
+		return id;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -30,22 +31,22 @@ public class User {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public String getUserAuthor() {
+	public Integer getUserAuthor() {
 		return userAuthor;
 	}
-	public void setUserAuthor(String userAuthor) {
+	public void setUserAuthor(Integer userAuthor) {
 		this.userAuthor = userAuthor;
 	}
-	public String getUserDepartment() {
+	public Integer getUserDepartment() {
 		return userDepartment;
 	}
-	public void setUserDepartment(String userDepartment) {
+	public void setUserDepartment(Integer userDepartment) {
 		this.userDepartment = userDepartment;
 	}
-	public String getUserSex() {
+	public Integer getUserSex() {
 		return userSex;
 	}
-	public void setUserSex(String userSex) {
+	public void setUserSex(Integer userSex) {
 		this.userSex = userSex;
 	}
 	public String getUserPhone() {

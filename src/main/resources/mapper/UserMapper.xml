@@ -3,14 +3,99 @@
  <mapper namespace="com.boot.dao.mapper.UserMapper"> 
  <!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！--> 
  	<resultMap id="BaseResultMap" type="com.boot.dao.domain.User"> 
- 		<id column="user_id" property="userId" jdbcType="INTEGER" /> 
+ 		<id column="id" property="id" jdbcType="INTEGER" /> 
  		<result column="user_name" property="userName" jdbcType="CHAR" /> 
  		<result column="user_password" property="userPassword" jdbcType="CHAR" /> 
+ 		<result column="user_author" property="userAuthor" jdbcType="TINYINT" /> 
+ 		<result column="user_department" property="userDepartment" jdbcType="TINYINT" /> 
+ 		<result column="user_sex" property="userSex" jdbcType="TINYINT" /> 
+ 		<result column="user_phone" property="userPhone" jdbcType="CHAR" /> 
+ 		<result column="user_email" property="userEmail" jdbcType="CHAR" /> 
+ 		<result column="user_address" property="userAddress" jdbcType="CHAR" /> 
+ 		<result column="user_head" property="userHead" jdbcType="CHAR" /> 
  	</resultMap> 
  	<!-- 查询单条记录 --> 
  	<select id="selectUserById" parameterType="int" resultMap="BaseResultMap"> 
- 		SELECT * FROM user WHERE user_id = #{userId} 
+ 		SELECT * FROM user WHERE id = #{id} 
  	</select> 
+ 	
+ 	<!-- 登录 -->
+ 	<select id="selectPassByName" parameterType="String" resultType="String">
+ 		SELECT u.user_password from user u where user_name = #{userName}
+ 	</select>
+ 	
+ 	<!-- 根据用户名获取用户所有信息 -->
+ 	<select id="selectInfoByName" parameterType="String" resultMap="BaseResultMap">
+ 		SELECT u.* from user u where u.user_name = #{userName}
+ 	</select>
+ 	
+ 	<select id="selectAllUser" parameterType="Map" resultMap="BaseResultMap">
+ 		   select * from user  
+		   <if test="start!=null and pageSize!=null">  
+		        limit #{start},#{pageSize}  
+		   </if>  
+ 	</select>
+ 	
+ 	<!-- 插入新用户 -->
+ 	<insert id="insertUser" parameterType="com.boot.dao.domain.User">
+ 		  INSERT INTO user (user_name,
+ 		  					user_password,
+ 		  					user_author,
+ 		  					user_department,
+ 		  					user_sex,
+ 		  					user_phone,
+ 		  					user_email,
+ 		  					user_address,
+ 		  					user_head)
+ 		  			VALUES (#{userName},
+ 		  					#{userPassword},
+ 		  					#{userAuthor},
+ 		  					#{userDepartment},
+ 		  					#{userSex},
+ 		  					#{userPhone},
+ 		  					#{userEmail},
+ 		  					#{userAddress},
+ 		  					#{userHead})
+		           <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">  
+		             SELECT LAST_INSERT_ID() AS id  
+		        </selectKey>   
+ 	</insert>
+ 	
+ 	<update id ="updateUserInfo" parameterType = "com.boot.dao.domain.User">
+ 		UPDATE user
+ 		  <set>
+		      <if test="userPassword != null">
+		        user_password = #{userPassword,jdbcType=VARCHAR},
+		      </if>
+		      <if test="userAuthor != null">
+		        user_author = #{userAuthor,jdbcType=TINYINT},
+		      </if>
+		      <if test="userDepartment != null">
+		        user_department = #{userDepartment,jdbcType=TINYINT},
+		      </if>
+		      <if test="userSex != null">
+		        user_sex = #{userSex,jdbcType=TINYINT},
+		      </if>
+		      <if test="userPhone != null">
+		        user_phone = #{userPhone,jdbcType=VARCHAR},
+		      </if>
+		      <if test="userEmail != null">
+		        user_email = #{userEmail,jdbcType=VARCHAR},
+		      </if>
+   		      <if test="userAddress != null">
+		        user_address = #{userAddress,jdbcType=VARCHAR},
+		      </if>
+    		  <if test="userHead != null">
+		        user_head = #{userHead,jdbcType=VARCHAR},
+		      </if>
+	    </set>
+	    where user_name = #{userName,jdbcType=VARCHAR}
+ 	</update>
+ 	
+ 	<delete id = "deleteUserByUserName" parameterType ="String">
+ 		delete from user
+ 		where user_name = #{userName,jdbcType = VARCHAR}
+ 	</delete>
 </mapper> 
 
 
