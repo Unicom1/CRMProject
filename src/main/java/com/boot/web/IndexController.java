@@ -16,7 +16,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.boot.WebSecurityConfig;
+import com.boot.dao.domain.User;
 import com.boot.service.UserService;
+import com.boot.utils.Utils;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,10 +37,42 @@ public class IndexController {
     public String  getIndex() {
         return INDEX;
     }
-	@RequestMapping(value="/login")
-    public String login() {
-        return LOGIN;
-    }
+	/**
+	 * 登录，若成功，返回0，若密码错误，返回1，若账号不存在，返回2,报错返回error
+	 * @param userId
+	 * @param userPassword
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value="/login",method = RequestMethod.POST)
+	@ResponseBody
+	@ApiOperation(value = "登录接口",notes = "传入用户名和用户密码，若登陆成功返回0，密码错误返回1，账号不存在返回2，报错返回error")
+	public Map login(
+			@ApiParam(value = "用户名")@RequestParam String userName,
+			@ApiParam(value = "用户密码")@RequestParam String userPassword) {
+		
+		Map jsonData = new HashMap();
+		try {
+			int state = userService.login(userName, userPassword);
+			
+			//如果登陆成功，设置session
+			if(state == 0) {
+				User userInfo = userService.selectInfoByName(userName);
+				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+				HttpSession session = request.getSession();
+				session.setAttribute(WebSecurityConfig.SESSION_USERNAME,userName);
+				session.setAttribute(WebSecurityConfig.SESSION_AUTHOR, userInfo.getUserAuthor());
+				session.setAttribute(WebSecurityConfig.SESSION_DEPARTMENT, userInfo.getUserDepartment());
+			}
+			jsonData.put("state", state);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jsonData.put("state",Utils.ERROR);
+		}
+
+		return jsonData;
+	}
 	
 	//注销登录，消除session
 	@RequestMapping(value="/logout")

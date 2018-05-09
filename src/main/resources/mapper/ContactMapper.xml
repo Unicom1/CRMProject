@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.boot.dao.mapper.ContactMapper">  
+ 	<resultMap id="BaseResultMap" type="com.boot.dao.domain.Contact"> 
+ 		<id column="id" property="id" jdbcType="INTEGER" /> 
+ 		<result column="contact_name" property="contactName" jdbcType="VARCHAR" /> 
+ 		<result column="contact_role" property="contactRole" jdbcType="VARCHAR" /> 
+ 		<result column="contact_position" property="contactPosition" jdbcType="VARCHAR" /> 
+ 		<result column="contact_sex" property="contactSex" jdbcType="INTEGER" /> 
+ 		<result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" /> 
+ 		<result column="contact_email" property="contactEmail" jdbcType="VARCHAR"/>
+ 		<result column="contact_address" property="contactAddress" jdbcType="VARCHAR"/>
+ 		<result column="contact_create_user" property="contactCreateUser" jdbcType="VARCHAR"/>
+ 		<result column="contact_create_time" property="contactCreateTime" jdbcType="TIMESTAMP"/>
+ 		<result column="contact_remark" property="contactRemark" jdbcType="VARCHAR" /> 
+ 	</resultMap> 
+ 	
+ 	<!-- 插入新客户 -->
+ 	<insert id="insertContact" parameterType="com.boot.dao.domain.Contact">
+ 		  INSERT INTO contact (contact_name,
+ 		  					contact_role,
+ 		  					contact_position,
+ 		  					contact_sex,
+ 		  					contact_phone,
+ 		  					contact_email,
+ 		  					contact_address,
+ 		  					contact_create_user,
+ 		  					contact_create_time,
+ 		  					contact_remark)
+ 		  			VALUES (#{contactName},
+ 		  					#{contactRole},
+ 		  					#{contactPosition},
+ 		  					#{contactSex},
+ 		  					#{contactPhone},
+ 		  					#{contactEmail},
+ 		  					#{contactAddress},
+ 		  					#{contactCreateUser},
+ 		  					#{contactCreateTime},
+ 		  					#{contactRemark})
+		           <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">  
+		             SELECT LAST_INSERT_ID() AS id  
+		        </selectKey>   
+ 	</insert>
+ 	
+ 	<update id ="updateContactInfo" parameterType = "com.boot.dao.domain.Contact">
+ 		UPDATE contact
+ 		  <set>
+		      <if test="contactName != null">
+		        contact_name = #{contactName,jdbcType=VARCHAR},
+		      </if>
+		      <if test="contactRole != null">
+		        contact_role = #{contactRole,jdbcType=VARCHAR},
+		      </if>
+    		  <if test="contactPosition != null">
+		        contact_position = #{contactPosition,jdbcType=VARCHAR},
+		      </if>
+		      <if test="contactSex != null">
+		        contact_sex = #{contactSex,jdbcType=INTEGER},
+		      </if>
+		      <if test="contactPhone != null">
+		        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+		      </if>
+		      <if test="contactEmail != null">
+		        contact_email = #{contactEmail,jdbcType=VARCHAR},
+		      </if>
+		      <if test="contactAddress != null">
+		        contact_address = #{contactAddress,jdbcType=VARCHAR},
+		      </if>
+   		      <if test="contactCreateUser != null">
+		        contact_create_user = #{contactCreateUser,jdbcType=VARCHAR},
+		      </if>
+   		      <if test="contactRemark != null">
+		        contact_remark = #{contactRemark,jdbcType=BLOB},
+		      </if>
+	    </set>
+	    where id = #{id,jdbcType=INTEGER}
+ 	</update>
+
+</mapper> 

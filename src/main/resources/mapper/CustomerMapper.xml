@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.boot.dao.mapper.CustomerMapper"> 
+ <!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！--> 
+ 	<resultMap id="BaseResultMap" type="com.boot.dao.domain.Customer"> 
+ 		<id column="id" property="id" jdbcType="INTEGER" /> 
+ 		<result column="c_name" property="cName" jdbcType="VARCHAR" /> 
+ 		<result column="c_state" property="cState" jdbcType="TINYINT" /> 
+ 		<result column="c_work" property="cWork" jdbcType="TINYINT" /> 
+ 		<result column="c_source" property="cSource" jdbcType="VARCHAR" />
+ 		 <result column="c_responsible" property="cResponsible" jdbcType="VARCHAR" />
+ 		<result column="c_level" property="cLevel" jdbcType="TINYINT" /> 
+ 		<result column="c_address" property="cAddress" jdbcType="VARCHAR"/>
+ 		<result column="c_create_time" property="cCreateTime" jdbcType="TIMESTAMP"/>
+ 		<result column="c_remark" property="cRemark" jdbcType="VARCHAR" /> 
+ 	</resultMap> 
+ 	
+ 	<!-- 根据id获取客户信息 -->
+ 	<select id = "selectCustomerById" parameterType="int" resultMap="BaseResultMap">
+		SELECT * FROM customer WHERE id = #{id} 
+	</select>
+	
+ 	<!-- 插入新客户 -->
+ 	<insert id="insertCustomer" parameterType="com.boot.dao.domain.Customer">
+ 		  INSERT INTO customer (c_name,
+ 		  					c_state,
+ 		  					c_work,
+ 		  					c_source,
+ 		  					c_responsible,
+ 		  					c_level,
+ 		  					c_address,
+ 		  					c_create_time,
+ 		  					c_remark)
+ 		  			VALUES (#{cName},
+ 		  					#{cState},
+ 		  					#{cWork},
+ 		  					#{cSource},
+ 		  					#{cResponsible},
+ 		  					#{cLevel},
+ 		  					#{cAddress},
+ 		  					#{cCreateTime},
+ 		  					#{cRemark})
+		           <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">  
+		             SELECT LAST_INSERT_ID() AS id  
+		        </selectKey>   
+ 	</insert>
+ 	
+ 	<update id ="updateCustomerInfo" parameterType = "com.boot.dao.domain.Customer">
+ 		UPDATE customer
+ 		  <set>
+		      <if test="cName != null">
+		        c_name = #{cName,jdbcType=VARCHAR},
+		      </if>
+		      <if test="cState != null">
+		        c_state = #{cState,jdbcType=TINYINT},
+		      </if>
+		      <if test="cWork != null">
+		        c_work = #{cWork,jdbcType=VARCHAR},
+		      </if>
+		      <if test="cSource != null">
+		        c_source = #{cSource,jdbcType=VARCHAR},
+		      </if>
+   		      <if test="cResponsible != null">
+		        c_responsible = #{cResponsible,jdbcType=VARCHAR},
+		      </if>
+		      <if test="cLevel != null">
+		        c_level = #{cLevel,jdbcType=TINYINT},
+		      </if>
+		      <if test="cAddress != null">
+		        c_address = #{cAddress,jdbcType=VARCHAR},
+		      </if>
+   		      <if test="cRemark != null">
+		        c_remark = #{cRemark,jdbcType=BLOB},
+		      </if>
+	    </set>
+	    where id = #{id,jdbcType=INTEGER}
+ 	</update>
+	
+	<insert id = "relateCustomerAndContact" parameterType="Map">
+			 INSERT INTO customer_contact (cc_customer_id,
+			 								cc_contact_id)
+			 						VALUES(#{customerId},
+			 								#{contactId})
+	</insert>
+	
+	<!-- 分页获取客户及联系人，使用两个null是因为union要求列数一样 -->
+	<select id="selectCustomerContainContact" parameterType="Map" resultType="java.util.HashMap">
+		SELECT 
+		    m.*,n.id as contact_id, n.contact_name, n.contact_phone
+		FROM
+		    customer m,
+		    contact n,
+		    crm.customer_contact cc
+		WHERE
+		    m.id = cc.cc_customer_id
+		        AND n.id = cc.cc_contact_id 
+		UNION SELECT 
+		    m.*, NULL,NULL, NULL
+		FROM
+		    customer m
+		        LEFT JOIN
+		    customer_contact n ON m.id = n.cc_customer_id
+		WHERE
+		    m.id NOT IN (SELECT 
+		            cc_customer_id
+		        FROM
+		            customer_contact)
+		LIMIT #{start},#{pageSize}  
+	</select>
+	
+	
+
+</mapper> 
