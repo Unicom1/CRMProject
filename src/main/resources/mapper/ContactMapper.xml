@@ -15,7 +15,13 @@
  		<result column="contact_remark" property="contactRemark" jdbcType="VARCHAR" /> 
  	</resultMap> 
  	
- 	<!-- 插入新客户 -->
+ 	<!-- 根据id获取联系人信息 -->
+ 	<select id = "selectContactById" parameterType="int" resultMap="BaseResultMap">
+		SELECT * FROM contact WHERE id = #{id} 
+	</select>
+	
+
+ 	<!-- 插入新联系人 -->
  	<insert id="insertContact" parameterType="com.boot.dao.domain.Contact">
  		  INSERT INTO contact (contact_name,
  		  					contact_role,
@@ -75,5 +81,43 @@
 	    </set>
 	    where id = #{id,jdbcType=INTEGER}
  	</update>
+ 	
+ 	<!-- 分页获取联系人及其所属客户 -->
+	<select id="selectContactContainCustomer" parameterType="Map" resultType="java.util.HashMap">
+			SELECT 
+			    m.*, n.id AS c_id, n.c_name
+			FROM
+			    contact m,
+			    customer n,
+			    customer_contact cc
+			WHERE
+			    m.id = cc.cc_contact_id
+			        AND n.id = cc.cc_customer_id 
+			UNION SELECT 
+			    m.*, '', ''
+			FROM
+			    contact m
+			        LEFT JOIN
+			    customer_contact n ON m.id = n.cc_contact_id
+			WHERE
+			    m.id NOT IN (SELECT 
+			            cc_contact_id
+			        FROM
+			            customer_contact)
+			LIMIT #{start},#{pageSize}  
+	</select>
+	
+	<!-- 获取还未关联客户的联系人  -->
+	<select id = "selectContactWithoutCustomer" resultMap="BaseResultMap">
+		SELECT 
+		    *
+		FROM
+		    contact
+		WHERE
+		    id NOT IN (SELECT 
+		            cc_contact_id
+		        FROM
+		            customer_contact)
+	</select>
 
 </mapper> 

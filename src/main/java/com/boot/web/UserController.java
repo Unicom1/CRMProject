@@ -101,7 +101,7 @@ public class UserController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value="/changeUserPass",method = RequestMethod.POST)
 	@ResponseBody
-	@ApiOperation(value = "修改用户密码",notes = "修改若成功，返回0，若旧密码错误，返回1，报错返回error")
+	@ApiOperation(value = "用户修改用户密码",notes = "修改若成功，返回0，若旧密码错误，返回1，报错返回error")
 	public Map userChangePass(
 			@ApiParam(value = "用户旧密码")@RequestParam String oldPass,
 			@ApiParam(value = "用户新密码")@RequestParam String newPass) {
@@ -122,6 +122,28 @@ public class UserController {
 			 User user = new User();
 			 user.setUserName(userName);
 			 user.setUserPassword(newPass);
+			 userService.updateUserInfo(user);
+			 jsonData.put("state",0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			jsonData.put("state",Utils.ERROR);
+		}
+		return jsonData;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value="/adminChangeUserPass",method = RequestMethod.POST)
+	@ResponseBody
+	@ApiOperation(value = "管理员修改用户密码",notes = "修改若成功，返回0，若旧密码错误，返回1，报错返回error")
+	public Map adminChangeUserPass(
+			@ApiParam(value = "用户名")@RequestParam String userName,
+			@ApiParam(value = "用户新密码")@RequestParam String userPass) {
+		Map jsonData = new HashMap();
+		try {
+			 
+			 User user = new User();
+			 user.setUserName(userName);
+			 user.setUserPassword(userPass);
 			 userService.updateUserInfo(user);
 			 jsonData.put("state",0);
 		} catch (Exception e) {

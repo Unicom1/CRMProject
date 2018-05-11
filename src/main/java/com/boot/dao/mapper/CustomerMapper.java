@@ -38,4 +38,10 @@ public interface CustomerMapper {
 	 */
 	@SuppressWarnings("rawtypes")
 	List<Map<String,Object>> selectCustomerContainContact(Map map);
+	
+	/**
+	 * 获取尚未关联联系人的客户
+	 * @return
+	 */
+	public List<Customer> selectCustomerWithoutContact();
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.dao.domain.Customer;
 import com.boot.service.CustomerService;
+import com.boot.service.DynamicsService;
 import com.boot.utils.Utils;
 
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +26,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private DynamicsService dynamicsService;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/selectCustomerById",method = RequestMethod.POST)
@@ -53,6 +57,7 @@ public class CustomerController {
 		try {
 			customer.setcResponsible(Utils.getCurrentUser());
 			customerService.insertCustomer(customer);
+			dynamicsService.insertDynamics(0, customer.getId());
 			jsonData.put("state",0);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,6 +112,23 @@ public class CustomerController {
 			List<Map<String,Object>> customerList = customerService.selectCustomerContainContact(startPage, pageSize);
 			jsonData.put("state", 0);
 			jsonData.put("aaData", customerList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			jsonData.put("state",Utils.ERROR);
+		}
+		return jsonData;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value="/selectCustomerWithoutContact",method = RequestMethod.POST)
+	@ResponseBody
+	@ApiOperation(value = "获取尚未关联联系人的客户",notes = "获取成功，返回0，报错返回error")
+	public Map selectCustomerWithoutContact() {
+		Map jsonData = new HashMap();
+		try {
+			List<Customer> customerList = customerService.selectCustomerWithoutContact();
+			jsonData.put("state",0);
+			jsonData.put("aaData",customerList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonData.put("state",Utils.ERROR);

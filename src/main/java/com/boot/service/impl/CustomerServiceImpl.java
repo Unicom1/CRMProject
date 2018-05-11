@@ -57,4 +57,10 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerMapper.selectCustomerById(id);
 	}
 
+	@Override
+	public List<Customer> selectCustomerWithoutContact() {
+		// TODO Auto-generated method stub
+		return customerMapper.selectCustomerWithoutContact();
+	}
+
 }

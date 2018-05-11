@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.dao.mapper.DynamicsMapper">  
+ 	<resultMap id="BaseResultMap" type="com.boot.dao.domain.Dynamics"> 
+ 		<id column="id" property="id" jdbcType="INTEGER" /> 
+ 		<result column="log_user_name" property="logUserId" jdbcType="VARCHAR" /> 
+ 		<result column="log_content" property="logContent" jdbcType="INTEGER" /> 
+ 		<result column="log_number" property="logNumber" jdbcType="INTEGER" /> 
+ 		<result column="log_time" property="logTime" jdbcType="TIMESTAMP" /> 
+ 	</resultMap> 
+ 	
+ 	 	
+ 	<insert id="insertDynamics" parameterType="com.boot.dao.domain.Dynamics">
+ 		  INSERT INTO log_dynamics (
+ 		  					log_user_name,
+ 		  					log_content,
+ 		  					log_number)
+ 		  			VALUES (#{logUserName},
+ 		  					#{logContent},
+ 		  					#{logNumber}
+ 		  				)
+		           <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">  
+		             SELECT LAST_INSERT_ID() AS id  
+		        </selectKey>   
+ 	</insert>
+ 	
+ </mapper>

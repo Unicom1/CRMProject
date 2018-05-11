@@ -38,5 +38,17 @@ public interface CustomerService {
 	 */
 	public void relateCustomerAndContact(int customerId, int contactId);
 	
+	/**
+	 * 分页获取客户，包含联系人
+	 * @param startPage
+	 * @param pageSize
+	 * @return
+	 */
 	public List<Map<String,Object>> selectCustomerContainContact(int startPage,int pageSize);
+	
+	/**
+	 * 获取尚未关联客户的联系人
+	 * @return
+	 */
+	public List<Customer> selectCustomerWithoutContact();
 }

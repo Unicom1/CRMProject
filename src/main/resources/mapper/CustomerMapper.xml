@@ -83,7 +83,7 @@
 			 								#{contactId})
 	</insert>
 	
-	<!-- 分页获取客户及联系人，使用两个null是因为union要求列数一样 -->
+	<!-- 分页获取客户及联系人，使用3个""是因为union要求列数一样 -->
 	<select id="selectCustomerContainContact" parameterType="Map" resultType="java.util.HashMap">
 		SELECT 
 		    m.*,n.id as contact_id, n.contact_name, n.contact_phone
@@ -95,7 +95,7 @@
 		    m.id = cc.cc_customer_id
 		        AND n.id = cc.cc_contact_id 
 		UNION SELECT 
-		    m.*, NULL,NULL, NULL
+		    m.*, "","", ""
 		FROM
 		    customer m
 		        LEFT JOIN
@@ -108,6 +108,17 @@
 		LIMIT #{start},#{pageSize}  
 	</select>
 	
-	
+	<!-- 获取还未关联联系人的客户  -->
+	<select id = "selectCustomerWithoutContact" resultMap="BaseResultMap">
+		SELECT 
+		    *
+		FROM
+		    customer
+		WHERE
+		    id NOT IN (SELECT 
+		            cc_customer_id
+		        FROM
+		            customer_contact)
+	</select>
 
 </mapper> 
