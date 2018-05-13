@@ -2,3 +2,14 @@
 .red{
 	color:#d32a2a
 }
+body, button, input, select, textarea,div {
+	font-family: tahoma,arial,‘Microsoft YaHei’;
+}
+body{
+	background-color:#f3f3f3;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+}
