@@ -63,4 +63,18 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerMapper.selectCustomerWithoutContact();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> queryCustomer(int startPage, int pageSize, String cName) {
+		// TODO Auto-generated method stub
+		Map map = new HashMap();
+		int start = (startPage-1)*pageSize;
+		map.put("start", start);
+		map.put("pageSize",pageSize);
+		if(cName !=null) {
+			map.put("cName", cName);
+		}
+		return customerMapper.queryCustomer(map);
+	}
+
 }

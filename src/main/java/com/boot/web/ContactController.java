@@ -65,7 +65,7 @@ public class ContactController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/changeContactInfo",method = RequestMethod.POST)
 	@ResponseBody
-	@ApiOperation(value = "编辑联系人接口",notes = "编辑联系人，但注意id信息不要传，若成功，返回0，报错返回error")
+	@ApiOperation(value = "编辑联系人接口",notes = "编辑联系人，若成功，返回0，报错返回error")
 	public Map changeContactInfo(@ApiParam(value="编辑联系人信息")@RequestBody Contact contact) {
 		Map jsonData = new HashMap();
 		
@@ -106,6 +106,25 @@ public class ContactController {
 		Map jsonData = new HashMap();
 		try {
 			List<Contact> contactList = contactService.selectContactWithoutCustomer();
+			jsonData.put("state",0);
+			jsonData.put("aaData",contactList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			jsonData.put("state", Utils.ERROR);
+		}
+		return jsonData;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value="/queryContactList",method = RequestMethod.POST)
+	@ResponseBody
+	@ApiOperation(value = "分页搜索联系人",notes = "搜索若不传入联系人名，则默认获取所有联系人，获取成功，返回0，报错返回error")
+	public Map queryContactList(@ApiParam(value = "页数")@RequestParam int startPage,
+			@ApiParam(value = "每页显示条数")@RequestParam int pageSize,
+			@ApiParam(value = "联系人名")@RequestParam(required=false) String contactName) {
+		Map jsonData = new HashMap();
+		try {
+			List<Map<String,Object>> contactList = contactService.queryContact(startPage, pageSize, contactName);
 			jsonData.put("state",0);
 			jsonData.put("aaData",contactList);
 		} catch (Exception e) {

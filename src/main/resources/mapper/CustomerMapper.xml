@@ -120,5 +120,36 @@
 		        FROM
 		            customer_contact)
 	</select>
+	
+	<select id="queryCustomer" parameterType="Map" resultMap="BaseResultMap">
+		SELECT  * FROM (
+	SELECT 
+		    m.*,n.id as contact_id, n.contact_name, n.contact_phone
+		FROM
+		    customer m,
+		    contact n,
+		    crm.customer_contact cc
+		WHERE
+		    m.id = cc.cc_customer_id
+		        AND n.id = cc.cc_contact_id 
+		UNION SELECT 
+		    m.*, "","", ""
+		FROM
+		    customer m
+		        LEFT JOIN
+		    customer_contact n ON m.id = n.cc_customer_id
+		WHERE
+		    m.id NOT IN (SELECT 
+		            cc_customer_id
+		        FROM
+		            customer_contact) )  x 
+		            	<where>
+		            		 <if test="cName != null">
+             					   and x.c_name like concat(concat("%",#{cName}),"%")
+           					 </if>
+		            		
+		            	</where>
+		            	LIMIT #{start},#{pageSize} 
+	</select>
 
 </mapper> 

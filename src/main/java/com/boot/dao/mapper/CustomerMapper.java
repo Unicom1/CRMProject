@@ -44,4 +44,12 @@ public interface CustomerMapper {
 	 * @return
 	 */
 	public List<Customer> selectCustomerWithoutContact();
+	
+	/**
+	 * 搜索客户
+	 * @param map
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public List<Map<String,Object>> queryCustomer(Map map);
 }

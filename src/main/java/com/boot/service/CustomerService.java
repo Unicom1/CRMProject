@@ -51,4 +51,13 @@ public interface CustomerService {
 	 * @return
 	 */
 	public List<Customer> selectCustomerWithoutContact();
+	
+	/**
+	 * 搜索客户
+	 * @param startPage
+	 * @param pageSize
+	 * @param cName
+	 * @return
+	 */
+	public List<Map<String,Object>> queryCustomer(int startPage,int pageSize,String cName);
 }

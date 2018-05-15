@@ -53,6 +53,20 @@ public class ContactServiceImpl implements ContactService{
 		return contactMapper.selectContactWithoutCustomer();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public List<Map<String, Object>> queryContact(int startPage, int pageSize, String contactName) {
+		// TODO Auto-generated method stub
+		Map map = new HashMap();
+		int start = (startPage-1)*pageSize;
+		map.put("start", start);
+		map.put("pageSize",pageSize);
+		if(contactName != null) {
+			map.put("contactName", contactName);
+		}
+		return contactMapper.queryContact(map);
+	}
+
 
 
 

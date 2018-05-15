@@ -39,4 +39,13 @@ public interface ContactService {
 	 * @return
 	 */
 	public List<Contact> selectContactWithoutCustomer();
+	
+	/**
+	 * 搜索联系人
+	 * @param startPage
+	 * @param pageSize
+	 * @param contactName
+	 * @return
+	 */
+	public List<Map<String,Object>> queryContact(int startPage,int pageSize,String contactName);
 }

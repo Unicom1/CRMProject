@@ -69,7 +69,7 @@ public class CustomerController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/changeCustomerInfo",method = RequestMethod.POST)
 	@ResponseBody
-	@ApiOperation(value = "新增客户接口",notes = "修改客户信息，但createTime信息不要传，若成功，返回0，报错返回error")
+	@ApiOperation(value = "修改客户信息接口",notes = "修改客户信息，但createTime信息不要传，若成功，返回0，报错返回error")
 	public Map changeCustomerInfo(@ApiParam(value="客户信息")@RequestBody Customer customer) {
 		Map jsonData = new HashMap();
 		try {
@@ -129,6 +129,26 @@ public class CustomerController {
 			List<Customer> customerList = customerService.selectCustomerWithoutContact();
 			jsonData.put("state",0);
 			jsonData.put("aaData",customerList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			jsonData.put("state",Utils.ERROR);
+		}
+		return jsonData;
+	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value="/queryCustomerList",method = RequestMethod.POST)
+	@ResponseBody
+	@ApiOperation(value = "分页搜索客户",notes = "搜索客户，若不传入客户名则默认获取所有客户,成功，返回0，报错返回error")
+	public Map queryCustomerList(@ApiParam(value = "页数")@RequestParam int startPage,
+			@ApiParam(value = "每页显示条数")@RequestParam int pageSize,
+			@ApiParam(value = "客户名")@RequestParam(required=false) String cName	) {
+		Map jsonData = new HashMap();
+		try {
+			List<Map<String,Object>> customerList = customerService.queryCustomer(startPage, pageSize, cName);
+			jsonData.put("state", 0);
+			jsonData.put("aaData", customerList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonData.put("state",Utils.ERROR);

@@ -119,5 +119,38 @@
 		        FROM
 		            customer_contact)
 	</select>
+	
+	
+		<select id="queryContact" parameterType="Map" resultType="java.util.HashMap">
+			SELECT * FROM (
+				SELECT 
+				    m.*, n.id AS c_id, n.c_name
+				FROM
+				    contact m,
+				    customer n,
+				    customer_contact cc
+				WHERE
+				    m.id = cc.cc_contact_id
+				        AND n.id = cc.cc_customer_id 
+				UNION SELECT 
+				    m.*, '', ''
+				FROM
+				    contact m
+				        LEFT JOIN
+				    customer_contact n ON m.id = n.cc_contact_id
+				WHERE
+				    m.id NOT IN (SELECT 
+				            cc_contact_id
+				        FROM
+				            customer_contact) ) x
+				       <where>
+		            		 <if test="contactName != null">
+             					   and x.contact_name like concat(concat("%",#{contactName}),"%")
+           					 </if>
+		            		
+		            	</where>
+		            	LIMIT #{start},#{pageSize} 
+			
+	</select>
 
 </mapper> 

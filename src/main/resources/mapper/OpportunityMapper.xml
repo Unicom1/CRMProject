@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.dao.mapper.OpportunityMapper">  
+ 	<resultMap id="BaseResultMap" type="com.boot.dao.domain.Opportunity"> 
+ 		<id column="id" property="id" jdbcType="INTEGER" /> 
+ 		<result column="bussess_name" property="bussessName" jdbcType="VARCHAR" /> 
+ 		<result column="bussess_customer_id" property="bussessCustomerId" jdbcType="INTEGER" /> 
+ 		<result column="bussess_customer_name" property="bussessCustomerName" jdbcType="VARCHAR" /> 
+ 		<result column="bussess_contact_id" property="bussessContactId" jdbcType="INTEGER" /> 
+ 		
+ 		 <result column="bussess_contact_name" property="bussessContactName" jdbcType="VARCHAR" /> 
+ 		<result column="bussess_progress" property="bussessProgress" jdbcType="INTEGER" /> 
+ 		<result column="bussess_rate" property="bussessRate" jdbcType="INTEGER" /> 
+ 		<result column="bussess_next_contact" property="bussessNextContact" jdbcType="DATE" /> 
+ 		 <result column="bussess_money" property="bussessMoney" jdbcType="INTEGER" /> 
+ 		<result column="bussess_state" property="bussessState" jdbcType="INTEGER" /> 
+ 		<result column="bussess_remark" property="bussessRemark" jdbcType="VARCHAR" /> 
+ 		<result column="bussess_responsible" property="bussessResponsible" jdbcType="VARCHAR" /> 
+ 		<result column="bussess_create_time" property="bussessCreateTime" jdbcType="TIMESTAMP" /> 
+ 	</resultMap> 
+ 	
+ 	<insert id="insertOpportunity" parameterType="com.boot.dao.domain.Opportunity">
+ 		  INSERT INTO bussess_opportunity (bussess_name,
+ 		  					bussess_customer_id,
+ 		  					bussess_customer_name,
+ 		  					bussess_contact_id,
+ 		  					bussess_contact_name,
+ 		  					bussess_progress,
+ 		  					bussess_rate,
+ 		  					bussess_next_contact,
+ 		  					bussess_money,
+ 		  					bussess_state,
+ 		  					bussess_remark,
+ 		  					bussess_responsible,
+ 		  					bussess_create_time)
+ 		  			VALUES (#{bussessName},
+ 		  					#{bussessCustomerId},
+ 		  					#{bussessCustomerName},
+ 		  					#{bussessContactId},
+ 		  					#{bussessContactName},
+ 		  					#{bussessProgress},
+ 		  					#{bussessRate},
+ 		  					#{bussessNextContact},
+ 		  					#{bussessMoney},
+ 		  					#{bussessState},
+ 		  					#{bussessRemark},
+ 		  					#{bussessResponsible},
+ 		  					#{bussessCreateTime})
+		           <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">  
+		             SELECT LAST_INSERT_ID() AS id  
+		        </selectKey>   
+ 	</insert>
+ 	
+ 		<update id ="updateOppoInfo" parameterType = "com.boot.dao.domain.Opportunity">
+ 		UPDATE bussess_opportunity
+ 		  <set>
+		      <if test="bussessName != null">
+		        bussess_name = #{bussessName,jdbcType=VARCHAR},
+		      </if>
+		      	<if test="bussessCustomerId != null">
+		        bussess_customer_id = #{bussessCustomerId,jdbcType=INTEGER},
+		      </if>
+		 	   <if test="bussessCustomerName != null">
+		        bussess_customer_name = #{bussessCustomerName,jdbcType=VARCHAR},
+		      </if>
+		       <if test="bussessContactId != null">
+		        bussess_contact_id = #{bussessContactId,jdbcType=INTEGER},
+		      </if>
+		      <if test="bussessContactName != null">
+		        bussess_contact_name = #{bussessContactName,jdbcType=VARCHAR},
+		      </if>
+		      <if test="bussessProgress != null">
+		        bussess_progress = #{bussessProgress,jdbcType=INTEGER},
+		      </if>
+		      <if test="bussessRate != null">
+		        bussess_rate = #{bussessRate,jdbcType=INTEGER},
+		      </if>
+		      <if test="bussessNextContact != null">
+		        bussess_next_contact = #{bussessNextContact,jdbcType=DATE},
+		      </if>
+		      <if test="bussessMoney != null">
+		        bussess_money = #{bussessMoney,jdbcType=INTEGER},
+		      </if>
+		      <if test="bussessState != null">
+		        bussess_state = #{bussessState,jdbcType=INTEGER},
+		      </if>
+		      <if test="bussessRemark != null">
+		        bussess_remark = #{bussessRemark,jdbcType=VARCHAR},
+		      </if>
+		      <if test="bussessResponsible != null">
+		        bussess_responsible = #{bussessResponsible,jdbcType=VARCHAR},
+		      </if>
+		      <if test="bussessCreateTime != null">
+		        bussess_create_time = #{bussessCreateTime,jdbcType=TIMESTAMP},
+		      </if>
+		  </set>
+		    where id = #{id,jdbcType=INTEGER}
+	</update>
+ 	
+ 	<select id = "selectAllOppo"  parameterType="Map" resultMap="BaseResultMap">
+ 		select * from bussess_opportunity
+ 		   <where>
+           		 <if test="bussessName != null">
+   					   and bussess_name like concat(concat("%",#{bussessName}),"%")
+				 </if>
+		            		
+          	</where>LIMIT #{start},#{pageSize} 
+ 	</select>
+ 	
+ 	<select id = "selectOppoById"  parameterType="int" resultMap="BaseResultMap">
+ 		select * from bussess_opportunity where id = #{id,jdbcType=INTEGER}
+ 	</select>
+ </mapper>

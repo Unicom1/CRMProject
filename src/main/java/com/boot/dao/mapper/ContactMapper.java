@@ -42,4 +42,12 @@ public interface ContactMapper {
 	 * @return
 	 */
 	public List<Contact> selectContactWithoutCustomer();
+	
+	/**
+	 * 搜索联系人
+	 * @param map
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public List<Map<String,Object>> queryContact(Map map);
 }
