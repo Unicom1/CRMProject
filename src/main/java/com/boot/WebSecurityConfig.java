@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
         // 排除配置,springboot默认error页面为/error，暂时不需自定义error页面
         addInterceptor.excludePathPatterns("/error");
         addInterceptor.excludePathPatterns("/index/login");
+        addInterceptor.excludePathPatterns("/index/loginPage");
         addInterceptor.excludePathPatterns("/index/register");
         addInterceptor.excludePathPatterns("/index/logout");
         // 拦截配置
@@ -48,7 +49,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
                 return true;
 
             // 跳转登录
-            String url = "/index/login";
+            String url = "/index/loginPage";
             response.sendRedirect(url);
             return false;
         }
