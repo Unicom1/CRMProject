@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 //拦截器暂不启动，否则接口无法测试
-@Configuration
+//@Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter{
 
 	public final static String SESSION_USERNAME = "userName";//用户名

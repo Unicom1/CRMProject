@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>客户关系管理系统</title>
     <link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.min.css" >
+    <link href="../../css/bootstrap-table.min.css" rel="stylesheet">
     <!--<link href="../js/AdminLTE/css/AdminLTE.min.css" rel="stylesheet">-->
     <!--<link href="../js/AdminLTE/css/skins/_all-skins.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="../../css/index.css">
@@ -12,6 +13,8 @@
     <!--<script src="../js/AdminLTE/js/app.min.js"></script>-->
     <script src="../../js/bootstrap.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
+    <!--<script src="../../js/bootstrap-table.min.js"></script>-->
+    <!--<script src="../../js/bootstrap-table-zh-CN.min.js"></script>-->
     <script src="../../js/layer/layer.js"></script>
     <style>
         #userMenu{
@@ -48,7 +51,7 @@
         <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
         <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
     </div>
-    <div style="float:right;margin-right:50px;margin-top:20px;font-size:15px;"><a href="">退出系统</a></div>
+    <div style="float:right;margin-right:50px;margin-top:20px;font-size:15px;"><a href="/index/logout">退出系统</a></div>
     <div class="content" style="margin-left:170px;">
         <div>
             <ul id="userMenu">
@@ -56,18 +59,21 @@
                 <!--<li style="border:none;"><a href="javascript:void(0)" onclick="" style="color:grey;">修改密码</a></li>-->
             </ul>
         </div>
-        <div >
-            <table class="table table-bordered table-condensed list_table" style="text-align:center;background-color:#ffffff;width:90%;position:relative;top:20px;left:20px;">
+        <div class="" style="position:relative;top:70px;right:120px;">
+            <button type="button" id="" class="btn btn-primary" onclick="jumpAddUser()">新建用户</button>
+        </div>
+        <div style="width:95%;padding:60px 20px;">
+            <table class="table table-bordered table-condensed list_table" id="userTable" style="text-align:center;background-color:#ffffff;width:90%;position:relative;top:20px;left:20px;">
                 <thead >
                 <tr>
                 <th width="8%">ID</th>
                 <th width="10%">用户名</th>
-                <th width="5%">性别</th>
+                <th width="8%">性别</th>
                 <th width="8%">权限</th>
                 <th width="8%">部门</th>
                 <th width="15%">手机号</th>
                 <th width="15%">邮箱</th>
-                <th width="15%">头像</th>
+                <!--<th width="15%">头像</th>-->
                 <th>操作</th></tr>
                 </thead>
                 <tbody>
@@ -78,7 +84,7 @@
                     <td></td>
                     <td></td>
                     <td ></td>
-                    <td></td>
+                    <!--<td></td>-->
                     <td></td>
                     <td >
                         <a style="margin-right: 15px;"  href="">修改密码</a>
@@ -88,11 +94,19 @@
                 </tr>
                 </tbody>
             </table>
+            <div id="navPage"></div>
         </div>
     </div>
 
 </div>
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        renderPageNav('navPage',1,100);
+        getUser('1');
+
+    });
+
     $('.wmenu dl dt').click(function(){
         $(this).toggleClass('icotop');
         $(this).siblings('dd').toggleClass('hidden');
@@ -126,6 +140,112 @@
                 }
             })
         });
+    }
+
+    function renderPageNav(eleId, pageIndex, totalResult) {
+        var pageIndexInt = parseInt(pageIndex),
+                totalResultInt = parseInt(totalResult),
+        totalPage = parseInt(totalResultInt / 10),
+                pageNavStr = '';
+
+        if (totalResultInt % 10 > 0) {
+            totalPage++;
+        }
+
+        pageNavStr += '<nav aria-label="Page navigation"><ul class="pagination">';
+
+        if (pageIndexInt == 1) {
+            pageNavStr = pageNavStr + "<li class=\"disabled\"><a aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+        }
+        else {
+            pageNavStr = pageNavStr + "<li><a aria-label=\"Previous\" onclick=\"getUser(" + (pageIndexInt - 1) + ");\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
+        }
+
+        if (pageIndexInt < 6) {
+            for (var i = 1; i < pageIndexInt; i++) {
+                pageNavStr = pageNavStr + "<li><a onclick=\"getUser(" + i + ");\">" + i + "</a></li>";
+            }
+        }
+        else if (pageIndexInt < totalPage - 3) {
+            for (var i = pageIndexInt - 5; i < pageIndexInt; i++) {
+                pageNavStr = pageNavStr + "<li><a onclick=\"getUser(" + i + ");\">" + i + "</a></li>";
+            }
+        }
+        else {
+            for (var i = totalPage - 9; i < pageIndexInt; i++) {
+                pageNavStr = pageNavStr + "<li><a onclick=\"getUser(" + i + ");\">" + i + "</a></li>";
+            }
+        }
+
+        pageNavStr = pageNavStr + "<li class=\"active\"><a>" + pageIndexInt + "</a></li>";
+
+        if (pageIndexInt < 6) {
+            for (var i = pageIndexInt + 1; i <= 10 && i <= totalPage; i++) {
+                pageNavStr = pageNavStr + "<li><a onclick=\"getUser(" + i + ");\">" + i + "</a></li>";
+            }
+        }
+        else if (pageIndexInt < totalPage - 3) {
+            for (var i = pageIndexInt + 1; i <= pageIndexInt + 4; i++) {
+                pageNavStr = pageNavStr + "<li><a onclick=\"getUser(" + i + ");\">" + i + "</a></li>";
+            }
+        } else {
+            for (var i = pageIndexInt + 1; i <= totalPage; i++) {
+                pageNavStr = pageNavStr + "<li><a onclick=\"getUser(" + i + ");\">" + i + "</a></li>";
+            }
+        }
+
+        if (pageIndexInt == totalPage) {
+            pageNavStr = pageNavStr + "<li class=\"disabled\"><a aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+        }
+        else {
+            pageNavStr = pageNavStr + "<li><a aria-label=\"Next\" onclick=\"getUser(" + (pageIndexInt + 1) + ");\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
+        }
+
+        pageNavStr += '</ul></nav>';
+
+        $('#' + eleId).get(0).innerHTML = pageNavStr;
+    }
+
+    function getUser(startPage){
+        $.ajax({
+            url: '/User/selectUserByPage',
+            data: {'startPage':startPage,'pageSize':'10'},
+            dataType: 'json',
+            type: 'POST',
+            success: function (res) {
+                if(res.state==0){
+                    $('#userTable tbody').html("");
+
+                        $.each(res,function(index,item){
+                            $("#userTable").append(
+                                    '<tr >' +
+    //                                '<td ><input type="checkbox" name="select"></td >'+
+    //                                '<td  align="center"  ><a  href="javascript:void(0)" style="text-decoration: none">'+result.data[i]+'</a></td>'+
+                                    '<td>'+item.id+'</td>'+
+                                    '<td>'+item.user_name+'</td>'+
+                                    '<td>'+item.user_sex+'</td>'+
+                                    '<td>'+item.user_author+'</td>'+
+                                    '<td>'+item.user_department+'</td>'+
+                                    '<td>'+item.user_phone+'</td>'+
+                                    '<td>'+item.user_email+'</td>'+
+                                    '<ul  >' +
+                                    '<li><a href="javascript:void(0)" onclick="">编辑</a></li>' +
+                                    ' <li><a href="javascript:void(0)" onclick="">删除</a></li>' +
+                                    ' </ul>' +
+                                    ' </td>' +
+                                    '</tr>'
+                            )
+                      });
+                }
+            },
+            error: function () {
+                layer.msg("网络连接失败！");
+            }
+        })
+    }
+
+    function jumpAddUser(){
+        window.location.href='';
     }
 </script>
 </body>

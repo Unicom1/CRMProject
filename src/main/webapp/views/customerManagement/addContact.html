@@ -67,26 +67,30 @@
             </ul>
         </div>
         <div style="height:70px;"></div>
-        <div  class="row" style="background-color:#ffffff;width:95%;height:500px;margin-left:2.5%;">
+        <div  class="row" style="width:95%;height:500px;margin-left:2.5%;">
             <form role="form" id="addCustomerForm">
 
-                <div class="form-group" style="float:left;height:500px;overflow-y:auto;">
+                <div class="form-group" style="background-color:#ffffff;width:70%;height:500px;overflow-y:auto;">
                     <div class="header" style="font-weight:500;font-size:19px;padding:5px 0 10px 15px;" >
                         <span class="glyphicon glyphicon-user"></span><span>基本信息</span>
                     </div>
+                    <div class="col-sm-offset-1">
                     <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label" >联系人姓名</label>
                         <div class="col-sm-7">
-                            <input type="text"  class="form-control" id=""
+                            <input type="text"  class="form-control" id="contact_name"
                                    placeholder="请输入联系人姓名" value="" required>
                         </div>
-                        <div class="col-sm-offset-3 col-sm-7" style="color:lightgray">如有联系人信息，则联系人姓名不能为空</div>
+                        <div class="col-sm-2">
+                            <span class="glyphicon glyphicon-asterisk" style="color: orangered;position:relative;top:20px;right:25px;"></span>
+                        </div>
+                        <!--<div class="col-sm-offset-3 col-sm-7" style="color:lightgray">如有联系人信息，则联系人姓名不能为空</div>-->
                     </div>
                     <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label" >角色</label>
                         <div class="col-sm-7">
-                            <select class="form-control">
-                                <option>请选择</option>
+                            <select class="form-control" id="contact_role">
+                                <!--<option>请选择</option>-->
                                 <option>普通人</option>
                                 <option>决策人</option>
                                 <option>分项决策人</option>
@@ -102,7 +106,7 @@
                         <!--</div>-->
                     </div>
                     <div class="form-group col-sm-12">
-                        <label class="col-sm-3 control-label" >用户权限</label>
+                        <label class="col-sm-3 control-label" >尊称</label>
                         <div class="col-sm-7" style="padding-top:5px;">
                             <label><input type="radio" name="contact_sex"   value="0" checked="checked"/>先生</label>
                             <label><input type="radio" name="contact_sex"   style="margin-left:30px;" value="1"/>女士</label>
@@ -111,22 +115,22 @@
                     <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label" >职位</label>
                         <div class="col-sm-7">
-                            <input type="text"  class="form-control" id=""
+                            <input type="text"  class="form-control" id="contact_position"
                                    placeholder="请输入职位" value="" required>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label" >手机</label>
                         <div class="col-sm-7">
-                            <input type="text"  class="form-control" id=""
+                            <input type="text"  class="form-control" id="contact_phone"
                                    placeholder="请输入手机号码" value="" required>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
-                        <label class="col-sm-3 control-label" >邮箱地址</label>
+                        <label class="col-sm-3 control-label" >邮箱</label>
                         <div class="col-sm-7">
-                            <input type="email"  class="form-control" id=""
-                                   placeholder="请输入邮箱" value="" required>
+                            <input type="email"  class="form-control" id="contact_email"
+                                   placeholder="请输入邮箱地址" value="" required>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
@@ -137,21 +141,22 @@
                             </div>
                         </div>
                         <div class="col-sm-7 col-sm-offset-3">
-                            <input type="text"  class="form-control" id=""
+                            <input type="text"  class="form-control" id="contact_street"
                                    placeholder="请输入街道信息" value="" >
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
                         <label class="col-sm-3 control-label">备注信息</label>
                         <div class="col-sm-7">
-                            <textarea type=""  class="form-control" style="height:100px;" ></textarea>
+                            <textarea type=""  class="form-control" id="contact_remark" style="height:100px;" ></textarea>
                         </div>
+                    </div>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-md-offset-3" style="margin-top:25px;">
-            <button type="button" id="addCustomerBtn" class="btn btn-primary" onclick="addUser()">创建用户</button>
+            <button type="button" id="addCustomerBtn" class="btn btn-primary" onclick="addContact()">创建联系人</button>
         </div>
     </div>
 </div>
@@ -179,6 +184,50 @@
             }
         });
     });
+
+    function addContact(){
+        var contact_name = $('#contact_name').val();
+        var contact_role = $('#contact_role option:selected') .text();
+        var contact_position = $('#contact_position') .val();
+        var contact_sex = $("input[name='contact_sex']:checked").val();
+        var contact_email = $('#contact_email').val();
+        var contact_phone = $('#contact_phone').val();
+        var contact_address = $('#txt_city2').val();
+        var contact_remark = $('#contact_remark').val();
+
+        /*拼接街道*/
+        var contact_street = $('#contact_street').val();
+        if(contact_street!==''){
+            contact_address = contact_address +"-"+contact_street;
+        }
+
+        console.log(contact_name+","+contact_role+","+contact_sex+","+contact_position+","+contact_email+","+contact_phone+","+contact_address+","+contact_remark);
+
+        if(contact_name==''||contact_name==null){
+            layer.msg("联系人姓名不能为空！");
+        }else{
+            $.ajax({
+                url: '/Contact/addContact',
+                data: {'contact_name':contact_name,'contact_role':contact_role,'contact_position':contact_position,'contact_sex':contact_sex,
+                       'contact_email':contact_email,'contact_phone':contact_phone,'contact_address':contact_address,'contact_remark':contact_remark},
+                dataType: 'json',
+                type: 'POST',
+                success: function (res) {
+                    if (res.state == 0) {
+                        layer.msg("联系人已存在！");
+                    } else if (res.state == 1){
+                        layer.msg("新建联系人失败！");
+                    }else if (res.state == 2){
+                        layer.msg(res.errMsg);
+
+                    }
+                },
+                error: function () {
+                    layer.msg("网络连接失败！");
+                }
+            })
+        }
+    }
 
 </script>
 </body>

@@ -28,7 +28,20 @@ import io.swagger.annotations.ApiParam;
 @Controller
 @RequestMapping("/User")
 public class UserController {
-
+	
+	private static final String USERMANAGEMENT = "userManagement";
+	private static final String ADDUSER = "addUser";
+	
+	@RequestMapping(value="/userManagementPage")
+	public String getUserManagementPage() {
+		return USERMANAGEMENT;
+	}
+	
+	@RequestMapping(value="/addUserPage")
+	public String getAddUserPage() {
+		return ADDUSER;
+	}
+	
 	@Autowired
 	private UserService userService;
 	
@@ -170,7 +183,7 @@ public class UserController {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value="/selectAllUserByPage",method = RequestMethod.GET)
+	@RequestMapping(value="/selectAllUserByPage",method = RequestMethod.POST)
 	@ResponseBody
 	@ApiOperation(value = "分页获取用户",notes = "获取成功，返回0，报错返回error")
 	public Map selectAllUserByPage(@ApiParam(value = "页数")@RequestParam int startPage,

@@ -28,6 +28,7 @@ import io.swagger.annotations.ApiParam;
 public class IndexController {
 	private static final String INDEX = "index";
 	private static final String LOGIN = "login";
+
 	
 	@Autowired
 	private UserService userService;
@@ -37,6 +38,14 @@ public class IndexController {
     public String  getIndex() {
         return INDEX;
     }
+	
+	@RequestMapping(value="/loginPage")
+	public String getLogin() {
+		return LOGIN;
+	}
+	
+
+	
 	/**
 	 * 登录，若成功，返回0，若密码错误，返回1，若账号不存在，返回2,报错返回error
 	 * @param userId
@@ -82,7 +91,7 @@ public class IndexController {
 		session.removeAttribute(WebSecurityConfig.SESSION_USERNAME);
 		session.removeAttribute(WebSecurityConfig.SESSION_AUTHOR);
 		session.removeAttribute(WebSecurityConfig.SESSION_DEPARTMENT);
-		return "redirect:/index/login";
+		return "redirect:/index/loginPage";
 		
 	}
 

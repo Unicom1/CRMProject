@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css" >
+    <link href="../css/bootstrap-table.min.css" rel="stylesheet">
+    <!--<link href="../js/AdminLTE/css/AdminLTE.min.css" rel="stylesheet">-->
+    <!--<link href="../js/AdminLTE/css/skins/_all-skins.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/left_menu.css">
+    <script src="../js/jquery-3.2.1.js"></script>
+    <!--<script src="../js/AdminLTE/js/app.min.js"></script>-->
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!--<script src="../../js/bootstrap-table.min.js"></script>-->
+    <!--<script src="../../js/bootstrap-table-zh-CN.min.js"></script>-->
+    <script src="../js/layer/layer.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div style="width:95%;padding:50px">
+        <table class="table table-bordered table-condensed list_table" id="userTable" style="text-align:center;background-color:#ffffff;width:90%;position:relative;top:20px;left:20px;">
+            <thead >
+            <tr>
+                <th width="8%">ID</th>
+                <th width="10%">用户名</th>
+                <th width="8%">性别</th>
+                <th width="8%">权限</th>
+                <th width="8%">部门</th>
+                <th width="15%">手机号</th>
+                <th width="15%">邮箱</th>
+                <!--<th width="15%">头像</th>-->
+                <th>操作</th></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td >123</td>
+                <td ></td>
+                <td></td>
+                <td></td>
+                <td ></td>
+                <!--<td></td>-->
+                <td></td>
+                <td >
+                    <a style="margin-right: 15px;"  href="">修改密码</a>
+                    <a style="margin-right: 15px;"  href="">编辑</a>
+                    <a style="color: #FF0000;" href="javascript: void(0)" onclick="deleteAction(this)">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    var data123 = {"test1":{'id':'1','user_name':'1','user_sex':'1','user_phone':'1','user_author':'1','user_department':'1','user_email':'1'},
+        "test2":{'id':'12','user_name':'12','user_sex':'12','user_phone':'2','user_author':'12','user_department':'12','user_email':'12'}};
+
+    $(document).ready(function(){
+        var res = data123;
+
+        $.each(res,function(i,item){
+            console.log(item);
+            $("#userTable").append(
+                    '<tr >' +
+                    '<td>' + item.id + '</td>' +
+                    '<td>' + item.user_name + '</td>' +
+                    '<td>' + item.user_sex + '</td>' +
+                    '<td>' + item.user_author + '</td>' +
+                    '<td>' + item.user_department + '</td>' +
+                    '<td>' + item.user_phone + '</td>' +
+                    '<td>' + item.user_email + '</td>' +
+                    '<ul  >' +
+                    '<li><a href="javascript:void(0)" onclick="">编辑</a></li>' +
+                    ' <li><a href="javascript:void(0)" onclick="">删除</a></li>' +
+                    ' </ul>' +
+                    ' </td>' +
+                    '</tr>'
+            )
+         })
+    })
+
+</script>
+</body>
+</html>
