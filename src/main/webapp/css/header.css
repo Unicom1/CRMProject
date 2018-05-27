@@ -1,0 +1,42 @@
+.content{
+    margin-left:170px;
+}
+
+.listNav{
+    margin-left:10px;
+}
+.listNav li{
+    float:left;
+    list-style:none;
+    height:60px;
+    width:150px;
+    padding-top:10px;
+    text-align:center;
+    font-size:22px;
+    border-bottom:2px solid #ffb173;
+}
+a:hover{
+    text-decoration:none;
+}
+
+.logoutSystem{
+    float:right;
+    margin-right:50px;
+    margin-top:20px;
+    font-size:15px;
+}
+
+.changePassword{
+    float:right;
+    margin-right:50px;
+    margin-top:20px;
+    font-size:15px;
+}
+
+a:hover{
+    text-decoration:none;
+}
+
+table thead tr th{
+    text-align:center;
+}

@@ -104,7 +104,7 @@
 		<script type="text/javascript">
 
 		$(document).ready(function(){
-		renderPageNav('navPage',1,100);
+		renderPageNav('navPage',1,3);
 		getUser('1');
 
 		});
@@ -114,7 +114,7 @@
 		$(this).siblings('dd').toggleClass('hidden');
 		});
 
-		function deleteAction(self) {
+		function deleteUser(self) {
 		//var userName = $(self).parentNode.parentNode.firstChild.nextSibling.innerHTML;
 		console.log($(self).previousSibling);
 		layer.confirm("确定删除该用户？", {
@@ -124,7 +124,7 @@
 		//按钮【按钮一】的回调
 		$.ajax({
 		url: "/User/deleteUser" ,
-		data: {'userName':userName},
+		data: {'userName':self},
 		dataType: "json",
 		success: function (res) {
 		if (res.state == 0) {
@@ -221,9 +221,8 @@
 		}
 		else if(res.state==0){
 		$('#userTable tbody').html("");
-		
 		$.each(res.aaData,function(index,item){
-		
+
 		$("#userTable").append(
 		'<tr >' +
 		//                                '<td ><input type="checkbox" name="select"></td >'+
@@ -238,7 +237,7 @@
 		'<td>'+
 		'<ul  >' +
 		'<li><a href="javascript:void(0)" onclick="">编辑</a></li>' +
-		' <li><a href="javascript:void(0)" onclick="">删除</a></li>' +
+		' <li><a href="javascript:void(0)" onclick="deleteUser('+item.userName+')">删除</a></li>' +
 		' </ul>' +
 		' </td>' +
 		'</tr>'
@@ -251,6 +250,34 @@
 		}
 		})
 		}
+
+		<%--function deleteUser(userName){--%>
+			<%--layer.open({--%>
+				<%--title:"删除框",--%>
+				<%--content:'<span>是否要删除此条数据？</span>',--%>
+				<%--btn:['确认','取消'],--%>
+				<%--yes:function(index){--%>
+					<%--$.ajax({--%>
+					<%--url: '/User/deleteUser',--%>
+					<%--data: {'userName':userName},--%>
+					<%--dataType: 'json',--%>
+					<%--type: 'POST',--%>
+					<%--success: function (res) {--%>
+						<%--if(res.state == 0){--%>
+							<%--window.location.href= '/User/userManagementPage'--%>
+						<%--} else if(res.state == "ERROR") {--%>
+							<%--layer.msg("删除出错，请联系管理员");--%>
+							<%--return false;--%>
+						<%--}--%>
+					<%--},--%>
+					<%--error: function () {--%>
+					<%--layer.msg("网络出错！");--%>
+					<%--}--%>
+			<%--})--%>
+					<%--}--%>
+
+			<%--})--%>
+		<%--}--%>
 
 		function jumpAddUser(){
 		window.location.href='/User/addUserPage';

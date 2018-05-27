@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户关系管理系统</title>
+    <link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.min.css" >
+    <link href="../../css/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/left_menu.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/opportunityManagement/opportunityManagement.css">
+    <script src="../../js/jquery-3.2.1.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/layer/layer.js"></script>
+    <script src="../../js/changePassword.js"></script>
+    <script src="../../js/opportunityManagement/opportunityManagement.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="wmenu" >
+        <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">用户管理</a></dt></dl>
+        <dl style="background-color:#bdd7ee"><dt class="edit"><a href="#">商机管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div>
+                <ul class="listNav">
+                    <li><a href="javascript:void(0)" >商机列表</a></li>
+                    <!--<li style="border:none;"><a href="javascript:void(0)" onclick="" style="color:grey;">修改密码</a></li>-->
+                </ul>
+            </div>
+            <div class="logoutSystem" ><a href="/index/logout">退出系统</a></div>
+            <div class="changePassword" ><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
+        </div>
+        <div class="btnSpace form-group">
+            <button type="button" id="addBtn" class="btn btn-primary" onclick="jumpAddOppo()">新建商机</button>
+            <input type="text" placeholder="请输入商机ID查找"/>
+            <button type="button" id="searchBtn" class="btn " onclick="">搜索</button>
+        </div>
+        <div class="">
+            <table class="table table-bordered table-condensed list_table" id="oppoTable">
+                <thead >
+                <tr>
+                    <th width="8%">ID</th>
+                    <th width="10%">用户名</th>
+                    <th width="8%">性别</th>
+                    <th width="8%">权限</th>
+                    <th width="8%">部门</th>
+                    <th width="15%">手机号</th>
+                    <th width="15%">邮箱</th>
+                    <!--<th width="15%">头像</th>-->
+                    <th>操作</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td >123</td>
+                    <td ></td>
+                    <td></td>
+                    <td></td>
+                    <td ></td>
+                    <!--<td></td>-->
+                    <td></td>
+                    <td >
+                        <!--<a style="margin-right: 15px;"  href="">修改密码</a>-->
+                        <a style="margin-right: 15px;"  href="">编辑</a>
+                        <a style="color: #FF0000;" href="javascript: void(0)" onclick="deleteAction(this)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="navPage"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

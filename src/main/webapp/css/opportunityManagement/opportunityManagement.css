@@ -1,0 +1,29 @@
+.btnSpace{
+    position:relative;
+    top:70px;
+  //  right:120px;
+    margin-bottom:65px;
+}
+#addBtn{
+    position:relative;
+    right:140px;
+}
+.btnSpace input{
+    position:relative;
+    width:150px;
+    height:30px;
+    left:45%;
+}
+#searchBtn{
+    position:relative;
+    left:45%;
+}
+
+#oppoTable{
+    text-align:center;
+    background-color:#ffffff;
+    width:95%;
+    position: relative;
+    top:20px;
+    left:20px;
+}
