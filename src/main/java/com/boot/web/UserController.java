@@ -54,6 +54,7 @@ public class UserController {
 			//用户已存在，无法注册
 			if(userInfo != null && userInfo.getId()>0) {
 				jsonData.put("state",1);
+				jsonData.put("message", "用户已存在，无法注册");
 				return jsonData;
 			}
 			
@@ -62,14 +63,17 @@ public class UserController {
 			//插入成功
 			if(user.getId()> 0) {
 				jsonData.put("state",0);
+				jsonData.put("message", "新增用户成功");
 			} else {
 				//插入失败
 				jsonData.put("state", 2);
+				jsonData.put("message", "新增用户失败");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonData.put("state",Utils.ERROR);
+			jsonData.put("message", "系统报错，请联系管理员");
 		}
 		
 		return jsonData;

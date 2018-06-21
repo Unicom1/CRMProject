@@ -59,9 +59,11 @@ public class CustomerController {
 			customerService.insertCustomer(customer);
 			dynamicsService.insertDynamics(0, customer.getId());
 			jsonData.put("state",0);
+			jsonData.put("message", "新增客户成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonData.put("state",Utils.ERROR);
+			jsonData.put("message", "系统报错，请联系管理员");
 		}
 		return jsonData;
 	}
@@ -93,9 +95,11 @@ public class CustomerController {
 		try {
 			customerService.relateCustomerAndContact(customerId, contactId);
 			jsonData.put("state",0);
+			jsonData.put("message", "关联成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonData.put("state",Utils.ERROR);
+			jsonData.put("message", "系统报错，请联系管理员");
 		}
 		return jsonData;
 		
