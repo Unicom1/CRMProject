@@ -6,8 +6,8 @@ function changePassword(){
 		title:'修改密码',
 		content:'<div>'+
 		'<div><span>用户原密码：</span><input type="password"  id="userOldPassword" placeholder="请输入用户原密码"></div>'+
-		'<div style="margin:20px 0"><span>重复原密码：</span><input type="password"  id="repeatUserNewPassword" placeholder="请再次输入用户原密码"></div>'+
-		'<div><span>用户新密码：</span><input type="password"  id="userNewPassword" placeholder="请输入用户新密码"></div>'+
+		'<div style="margin:20px 0"><span>用户新密码：</span><input type="password"  id="userNewPassword" placeholder="请输入用户新密码"></div>'+
+		'<div><span>重复新密码：</span><input type="password"  id="repeatUserNewPassword" placeholder="请再次输入用户新密码"></div>'+
 		'</div>',
 		btn: ['确定', '取消'] //可以无限个按钮
 	}, function (index) {

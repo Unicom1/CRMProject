@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户关系管理系统</title>
+    <link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.min.css" >
+    <link href="../../css/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/left_menu.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/addModule.css">
+    <script src="../../js/jquery-3.2.1.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/layer/layer.js"></script>
+    <script src="../../js/changePassword.js"></script>
+    <script src="../../js/productManagement/addProduct.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="wmenu" >
+        <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">用户管理</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">客户管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">商机管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">合同管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">财务管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">数据分析管理</a></dt></dl>
+        <dl   class="chosenNav" style="background-color:#654e4e"><dt class="edit"><a href="#">办公管理</a></dt></dl>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div>
+                <ul class="listNav">
+                    <li><a href="javascript:void(0)" >新建工作日志</a></li>
+                    <li id="returnLink" ><a href="javascript:void(0)" onclick="">返回上一页面</a></li>
+                </ul>
+            </div>
+            <div class="logoutSystem" ><a href="/index/logout">退出系统</a></div>
+            <div class="changePassword" ><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
+        </div>
+        <div id="blankSpace"> </div>
+        <div class="oppoInfo">
+            <form class="form-horizontal col-sm-9" role="form" id="oppoForm">
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessId">编号</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessId"
+                               placeholder="请输入工作日志编号" value="" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessName">标题</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessName"
+                               placeholder="请输入工作日志标题" value="" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="userPassword">内容</label>
+                    <div class="col-sm-8">
+                        <textarea type="text"  class="form-control" id="userPassword"
+                               placeholder="请输入内容"  required></textarea>
+                    </div>
+                </div>
+
+            </form>
+            <div class="col-md-12 col-md-offset-4" style="">
+                <button type="button" id="addBtn" class="btn btn-primary" onclick="">创建工作日志</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

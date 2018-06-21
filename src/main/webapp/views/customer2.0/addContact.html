@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户关系管理系统</title>
+    <link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.min.css" >
+    <link href="../../css/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/left_menu.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/addModule.css">
+    <script src="../../js/jquery-3.2.1.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/layer/layer.js"></script>
+    <script src="../../js/changePassword.js"></script>
+    <script src="../../js/productManagement/addProduct.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="wmenu" >
+        <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">用户管理</a></dt></dl>
+        <dl class="chosenNav" style="background-color:#654e4e"><dt class="edit"><a href="#">客户管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">商机管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">合同管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">财务管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">数据分析管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">办公管理</a></dt></dl>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div>
+                <ul class="listNav">
+                    <li><a href="javascript:void(0)" >新建联系人</a></li>
+                    <li id="returnLink" ><a href="javascript:void(0)" onclick="">返回上一页面</a></li>
+                </ul>
+            </div>
+            <div class="logoutSystem" ><a href="/index/logout">退出系统</a></div>
+            <div class="changePassword" ><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
+        </div>
+        <div id="blankSpace"> </div>
+        <div class="oppoInfo">
+            <form class="form-horizontal col-sm-9" role="form" id="oppoForm">
+                <div class="form-group" style="background-color:#ffffff;width:70%;height:500px;overflow-y:auto;">
+                    <div class="header" style="font-weight:500;font-size:19px;padding:5px 0 10px 15px;" >
+                        <span class="glyphicon glyphicon-user"></span><span>基本信息</span>
+                    </div>
+                    <div class="col-sm-offset-1">
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label" >联系人姓名</label>
+                            <div class="col-sm-7">
+                                <input type="text"  class="form-control" id="contact_name"
+                                       placeholder="请输入联系人姓名" value="" required>
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="glyphicon glyphicon-asterisk" style="color: orangered;position:relative;top:20px;right:25px;"></span>
+                            </div>
+                            <!--<div class="col-sm-offset-3 col-sm-7" style="color:lightgray">如有联系人信息，则联系人姓名不能为空</div>-->
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label" >角色</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" id="contact_role">
+                                    <!--<option>请选择</option>-->
+                                    <option>普通人</option>
+                                    <option>决策人</option>
+                                    <option>分项决策人</option>
+                                    <option>商务决策</option>
+                                    <option>技术决策</option>
+                                    <option>财务决策</option>
+                                    <option>使用人</option>
+                                    <option>意见影响人</option>
+                                </select>
+                            </div>
+                            <!--<div class="col-sm-2">-->
+                            <!--<span class="glyphicon glyphicon-asterisk" style="color: orangered;position:relative;top:20px;right:25px;"></span>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label" >尊称</label>
+                            <div class="col-sm-7" style="padding-top:5px;">
+                                <label><input type="radio" name="contact_sex"   value="0" checked="checked"/>先生</label>
+                                <label><input type="radio" name="contact_sex"   style="margin-left:30px;" value="1"/>女士</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label" >职位</label>
+                            <div class="col-sm-7">
+                                <input type="text"  class="form-control" id="contact_position"
+                                       placeholder="请输入职位" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label" >手机</label>
+                            <div class="col-sm-7">
+                                <input type="text"  class="form-control" id="contact_phone"
+                                       placeholder="请输入手机号码" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label" >邮箱</label>
+                            <div class="col-sm-7">
+                                <input type="email"  class="form-control" id="contact_email"
+                                       placeholder="请输入邮箱地址" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label">地址</label>
+                            <div class="col-sm-9">
+                                <div  >
+                                    <input type="text" id="txt_city2" />
+                                </div>
+                            </div>
+                            <div class="col-sm-7 col-sm-offset-3">
+                                <input type="text"  class="form-control" id="contact_street"
+                                       placeholder="请输入街道信息" value="" >
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label">备注信息</label>
+                            <div class="col-sm-7">
+                                <textarea type=""  class="form-control" id="contact_remark" style="height:100px;" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <div class="col-md-12 col-md-offset-4" style="">
+                <button type="button" id="addBtn" class="btn btn-primary" onclick="">创建联系人</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

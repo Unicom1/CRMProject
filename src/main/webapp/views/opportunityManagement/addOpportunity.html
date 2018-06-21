@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户关系管理系统</title>
+    <link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.min.css" >
+    <link href="../../css/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/left_menu.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/addModule.css">
+    <script src="../../js/jquery-3.2.1.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/layer/layer.js"></script>
+    <script src="../../js/changePassword.js"></script>
+    <script src="../../js/opportunityManagement/addOpportunity.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="wmenu" >
+        <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">用户管理</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">客户管理</a></dt></dl>
+        <dl class="chosenNav" style="background-color:#654e4e"><dt class="edit"><a href="#">商机管理</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">产品管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">合同管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">财务管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">数据分析管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">办公管理</a></dt></dl>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div>
+                <ul class="listNav">
+                    <li><a href="javascript:void(0)" >新建商机</a></li>
+                    <li id="returnLink" ><a href="javascript:void(0)" onclick="">返回上一页面</a></li>
+                </ul>
+            </div>
+            <div class="logoutSystem" ><a href="/index/logout">退出系统</a></div>
+            <div class="changePassword" ><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
+        </div>
+        <div id="blankSpace"> </div>
+        <div class="Info">
+            <form class="form-horizontal col-sm-9" role="form" id="oppoForm">
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessId">商机编号</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessId"
+                               placeholder="请输入商机编号" value="" required>
+                </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessName">商机名</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessName"
+                               placeholder="请输入商机名" value="" required>
+                    </div>
+                </div>
+                <!--<div class="form-group col-md-offset-1">-->
+                    <!--<label class="col-sm-2 control-label" for="">通知部门</label>-->
+                    <!--<div class="col-sm-8">-->
+                        <!--<label><input type="radio" name="userAuthor"   style="margin-left:30px;" value="1"/>销售部</label>-->
+                        <!--<label><input type="radio" name="userAuthor"   style="margin-left:30px;" value="2"/>产品部</label>-->
+                        <!--<label><input type="radio" name="userAuthor"   style="margin-left:30px;" value="3"/>财务部</label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessCustomerName">客户</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessCustomerName"
+                               placeholder="请点击选择客户" value="" required>
+                    </div>
+                    <!--<div class="col-sm-8">-->
+                        <!--<textarea   class="form-control" id=""-->
+                               <!--placeholder="请点击选择客户人"   required> </textarea>-->
+                    <!--</div>-->
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessContactName">联系人</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessContactName"
+                               placeholder="请点击选择联系人" value="" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessProgress">商机进度</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="bussessProgress">
+                            <!--<option>请选择</option>-->
+                            <option value="0">初步洽谈</option>
+                            <option value="1">深入沟通</option>
+                            <option value="2">销售定价</option>
+                            <option value="3">合同发票</option>
+                            <option value="4">项目失败</option>
+                            <option value="5">完成收款</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessState">商机状态</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="bussessState">
+                            <!--<option>请选择</option>-->
+                            <option value="0">商机未签合同</option>
+                            <option value="1">商机已签合同</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessNextContact">下次联系时间</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessNextContact"
+                               placeholder="请输入下次联系时间" value="" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessMoney">商机金额</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessMoney"
+                               placeholder="请输入商机金额" value="" required>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessRate">成交几率</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="bussessRate">
+                            <!--<option>请选择</option>-->
+                            <option value="0">0</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="75">75</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-offset-1">
+                    <label class="col-sm-2 control-label" for="bussessRemark">备注信息</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control" id="bussessRemark"
+                               placeholder="请输入备注信息" value="" required>
+                    </div>
+                </div>
+
+            </form>
+            <div class="col-md-12 col-md-offset-4" style="">
+                <button type="button" id="addCustomerBtn" class="btn btn-primary" onclick="addOppo()">创建商机</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

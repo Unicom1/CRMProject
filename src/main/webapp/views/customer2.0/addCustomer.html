@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户关系管理系统</title>
+    <link rel="stylesheet" href="../../css/bootstrap/css/bootstrap.min.css" >
+    <link href="../../css/bootstrap-table.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/left_menu.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/addModule.css">
+    <script src="../../js/jquery-3.2.1.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/layer/layer.js"></script>
+    <script src="../../js/changePassword.js"></script>
+    <script src="../../js/productManagement/addProduct.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="wmenu" >
+        <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">用户管理</a></dt></dl>
+        <dl class="chosenNav" style="background-color:#654e4e"><dt class="edit"><a href="#">客户管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">商机管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">合同管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">财务管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">数据分析管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">办公管理</a></dt></dl>
+    </div>
+    <div class="content">
+        <div class="header">
+            <div>
+                <ul class="listNav">
+                    <li><a href="javascript:void(0)" >新建客户</a></li>
+                    <li id="returnLink" ><a href="javascript:void(0)" onclick="">返回上一页面</a></li>
+                </ul>
+            </div>
+            <div class="logoutSystem" ><a href="/index/logout">退出系统</a></div>
+            <div class="changePassword" ><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
+        </div>
+        <div id="blankSpace"> </div>
+        <div class="oppoInfo">
+            <form class="form-horizontal col-sm-9" role="form" id="oppoForm">
+                <div class="col-sm-offset-1">
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label" >客户名</label>
+                        <div class="col-sm-7">
+                            <input type="text"  class="form-control" id="c_name"
+                                   placeholder="请输入客户名" value="" required>
+                        </div>
+                        <div class="col-sm-2">
+                            <span class="glyphicon glyphicon-asterisk" style="color: orangered;position:relative;top:20px;right:25px;"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label" >客户状态</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="c_state">
+                                <option value="0">为意向客户</option>
+                                <option value="1">为已成交客户</option>
+                                <option value="2">失败客户</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <span class="glyphicon glyphicon-asterisk" style="color: orangered;position:relative;top:20px;right:25px;"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">客户行业</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="c_work">
+                                <option>IT</option>
+                                <option>电子商务</option>
+                                <option>教育</option>
+                                <option>贸易</option>
+                                <option>金融</option>
+                                <option>医疗</option>
+                                <option>房地产</option>
+                                <option>政府</option>
+                                <option>其他</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">客户信息来源</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="c_source">
+                                <!--<option>请选择</option>-->
+                                <option>电话</option>
+                                <option>网络</option>
+                                <option>上门</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--<div class="form-group col-sm-12">-->
+                    <!--<label class="col-sm-3 control-label" for="userName">客户负责人</label>-->
+                    <!--<div class="col-sm-7">-->
+                    <!--<input type="text"  class="form-control" id="userName"-->
+                    <!--placeholder="请输入用户名" value="" required>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">客户等级</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="c_level">
+                                <!--<option>请选择</option>-->
+                                <option value="1">一星</option>
+                                <option value="2">两星</option>
+                                <option value="3">三星</option>
+                                <option value="4">四星</option>
+                                <option value="5">五星</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">客户地址</label>
+                        <div class="col-sm-9">
+                            <div  >
+                                <input type="text" id="txt_city" />
+                            </div>
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-3">
+                            <input type="text"  class="form-control" id="c_street"
+                                   placeholder="请输入街道信息"  >
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-sm-3 control-label">备注信息</label>
+                        <div class="col-sm-7">
+                            <textarea id="c_remark"  class="form-control" style="height:100px;" ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <div class="col-md-12 col-md-offset-4" style="">
+                <button type="button" id="addBtn" class="btn btn-primary" onclick="">创建客户</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -34,6 +34,29 @@
         table thead tr th{
             text-align:center;
         }
+
+        /*分页*/
+        ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.pagination li {display: inline;}
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        ul.pagination li a.active {
+            background-color: #337ab7;
+            color: white;
+        }
+
+        ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     </style>
 </head>
 <body>
@@ -42,13 +65,15 @@
         <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
         <dl ><dt class="edit"><a href="#">用户管理</a></dt></dl>
         <dl style="background-color:#bdd7ee"><dt class="edit"><a href="#">客户管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">商机管理</a></dt></dl>
         <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">合同管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">财务管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">数据分析管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">办公管理</a></dt></dl>
     </div>
     <div style="float:right;margin-right:50px;margin-top:20px;font-size:15px;"><a href="">退出系统</a></div>
+    <div class="changePassword" style="float:right;margin-right:50px;margin-top:20px;font-size:15px;"><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
     <div class="content" style="margin-left:170px;">
         <div>
             <ul id="userMenu">
@@ -68,7 +93,7 @@
             <table class="table table-bordered table-condensed list_table" style="text-align:center;background-color:#ffffff;width:90%;position:relative;top:20px;left:20px;">
                 <thead >
                 <tr>
-                    <th width="5%"></th>
+                    <th width="5%"><input type="checkbox"/></th>
                     <th width="10%">客户名称</th>
                     <th width="10%">客户联系人</th>
                     <th width="8%">客户状态</th>
@@ -80,21 +105,40 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td></td>
-                    <td >123</td>
-                    <td ></td>
-                    <td></td>
-                    <td></td>
-                    <td ></td>
-                    <td></td>
-                    <td >
+                    <td><input type="checkbox"/></td>
+                    <td ><a>测试客户1</a></td>
+                    <td ><a>测试联系人1</a></td>
+                    <td>已成交客户</td>
+                    <td>IT</td>
+                    <td >网络</td>
+                    <td>三星</td>
+                    <td>
                         <!--<a style="margin-right: 15px;"  href="">修改密码</a>-->
-                        <!--<a style="margin-right: 15px;"  href="">编辑</a>-->
-                        <!--<a style="color: #FF0000;" href="javascript: void(0)" onclick="deleteAction(this)">删除</a>-->
+                        <a style="margin-right: 15px;"  href="">编辑</a>
+                        <a style="color: grey;" href="javascript: void(0)" onclick="deleteAction(this)">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td ><a>测试客户2</a></td>
+                    <td ><button>添加联系人</button></td>
+                    <td>意向客户</td>
+                    <td>食品</td>
+                    <td >上门</td>
+                    <td>二星</td>
+                    <td>
+                        <!--<a style="margin-right: 15px;"  href="">修改密码</a>-->
+                        <a style="margin-right: 15px;"  href="">编辑</a>
+                        <a style="color: grey;" href="javascript: void(0)" onclick="deleteAction(this)">删除</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <ul class="pagination" style="position:relative;left:450px;top:25px">
+                <li><a href="#">«</a></li>
+                <li><a class="active" href="#">1</a></li>
+                <li><a href="#">»</a></li>
+            </ul>
         </div>
     </div>
 

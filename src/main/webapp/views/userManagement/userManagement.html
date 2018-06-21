@@ -44,14 +44,16 @@
     <div class="wmenu">
         <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
         <dl style="background-color:#bdd7ee"><dt class="edit"><a href="#">用户管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">客户管理</a></dt></dl>
         <dl><dt class="edit"><a href="#">商机管理</a></dt></dl>
         <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">编辑管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">合同管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">财务管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">数据分析管理</a></dt></dl>
+        <dl><dt class="edit"><a href="#">办公管理</a></dt></dl>
     </div>
     <div style="float:right;margin-right:50px;margin-top:20px;font-size:15px;"><a href="/index/logout">退出系统</a></div>
+    <div class="changePassword" style="float:right;margin-right:50px;margin-top:20px;font-size:15px;"><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
     <div class="content" style="margin-left:170px;">
         <div>
             <ul id="userMenu">
@@ -62,7 +64,7 @@
         <div class="" style="position:relative;top:70px;right:120px;">
             <button type="button" id="" class="btn btn-primary" onclick="jumpAddUser()">新建用户</button>
         </div>
-        <div style="width:95%;padding:60px 20px;">
+        <div style="width:95%;padding:70px 20px;">
             <table class="table table-bordered table-condensed list_table" id="userTable" style="text-align:center;background-color:#ffffff;width:90%;position:relative;top:20px;left:20px;">
                 <thead >
                 <tr>
@@ -78,14 +80,29 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td></td>
-                    <td >123</td>
-                    <td ></td>
-                    <td></td>
-                    <td></td>
-                    <td ></td>
+                    <td>1234</td>
+                    <td >测试用户1</td>
+                    <td >男</td>
+                    <td>部门人员</td>
+                    <td>财务部</td>
+                    <td >13076629057</td>
                     <!--<td></td>-->
-                    <td></td>
+                    <td>386880619@qq.com</td>
+                    <td >
+                        <a style="margin-right: 15px;"  href="">修改密码</a>
+                        <a style="margin-right: 15px;"  href="">编辑</a>
+                        <a style="color: #FF0000;" href="javascript: void(0)" onclick="deleteAction(this)">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1235</td>
+                    <td >测试用户2</td>
+                    <td >女</td>
+                    <td>部门经理</td>
+                    <td>财务部</td>
+                    <td >13097625478</td>
+                    <!--<td></td>-->
+                    <td>751364295@qq.com</td>
                     <td >
                         <a style="margin-right: 15px;"  href="">修改密码</a>
                         <a style="margin-right: 15px;"  href="">编辑</a>
@@ -94,7 +111,7 @@
                 </tr>
                 </tbody>
             </table>
-            <div id="navPage"></div>
+            <div id="navPage" style="position:relative;left:460px;"></div>
         </div>
     </div>
 
@@ -102,7 +119,7 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        renderPageNav('navPage',1,100);
+        renderPageNav('navPage',1,10);
         getUser('1');
 
     });

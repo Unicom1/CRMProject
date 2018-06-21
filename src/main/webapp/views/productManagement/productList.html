@@ -14,27 +14,27 @@
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/layer/layer.js"></script>
     <script src="../../js/changePassword.js"></script>
-    <script src="../../js/opportunityManagement/opportunityManagement.js"></script>
+    <script src="../../js/productManagement/productList.js"></script>
     <style>
         /*分页*/
         /*ul.pagination {*/
-            /*display: inline-block;*/
-            /*padding: 0;*/
-            /*margin: 0;*/
+        /*display: inline-block;*/
+        /*padding: 0;*/
+        /*margin: 0;*/
         /*}*/
 
         /*ul.pagination li {display: inline;}*/
 
         /*ul.pagination li a {*/
-            /*color: black;*/
-            /*float: left;*/
-            /*padding: 8px 16px;*/
-            /*text-decoration: none;*/
+        /*color: black;*/
+        /*float: left;*/
+        /*padding: 8px 16px;*/
+        /*text-decoration: none;*/
         /*}*/
 
         /*ul.pagination li a.active {*/
-            /*background-color: #337ab7;*/
-            /*color: white;*/
+        /*background-color: #337ab7;*/
+        /*color: white;*/
         /*}*/
 
         /*ul.pagination li a:hover:not(.active) {background-color: #ddd;}*/
@@ -46,8 +46,8 @@
         <dl ><dt class="user"><a href="#" style="margin-left:15px;">首页</a></dt></dl>
         <dl ><dt class="edit"><a href="#">用户管理</a></dt></dl>
         <dl ><dt class="edit"><a href="#">客户管理</a></dt></dl>
-        <dl  class="chosenNav" style="background-color:#654e4e"><dt class="edit"><a href="#">商机管理</a></dt></dl>
-        <dl><dt class="edit"><a href="#">产品管理</a></dt></dl>
+        <dl ><dt class="edit"><a href="#">商机管理</a></dt></dl>
+        <dl class="chosenNav" style="background-color:#654e4e"><dt class="edit"><a href="#">产品管理</a></dt></dl>
         <dl><dt class="edit"><a href="#">合同管理</a></dt></dl>
         <dl ><dt class="edit"><a href="#">财务管理</a></dt></dl>
         <dl><dt class="edit"><a href="#">数据分析管理</a></dt></dl>
@@ -57,7 +57,7 @@
         <div class="header">
             <div>
                 <ul class="listNav">
-                    <li><a href="javascript:void(0)" >商机列表</a></li>
+                    <li><a href="javascript:void(0)" >产品列表</a></li>
                     <!--<li  style="border:none;"><a href="javascript:void(0)" onclick="" style="color:grey;">审批</a></li>-->
                     <!--<li  style="border:none;" ><a href="javascript:void(0)" style="color:grey;" onclick="">公告</a></li>-->
                 </ul>
@@ -65,24 +65,22 @@
             <div class="logoutSystem" ><a href="/index/logout">退出系统</a></div>
             <div class="changePassword" ><a href="javascript:void(0)" onclick="changePassword()">修改密码</a></div>
         </div>
-        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-        <!--<div id="main" style="width: 600px;height:400px;position:relative;left:30px;top:30px;"></div>-->
         <div class="btnSpace form-group"  style="position:relative;">
-            <button type="button" id="addBtn" class="btn btn-primary" onclick="jumpAddOppo()">新建商机</button>
-            <input type="text" placeholder="请输入商机编号查找" />
+            <button type="button" id="addBtn" class="btn btn-primary" onclick="jumpAddOppo()">新建产品</button>
+            <input type="text" placeholder="请输入产品编号查找" />
             <button type="button" id="searchBtn" class="btn " onclick="">搜索</button>
         </div>
         <div class="">
             <table class="table table-bordered table-condensed list_table" id="listTable">
                 <thead >
                 <tr>
-                    <th >商机编号</th>
-                    <th >商机名</th>
-                    <th >客户人</th>
-                    <th >联系人</th>
-                    <th >成交几率</th>
-                    <th >商机金额</th>
-                    <th >商机状态</th>
+                    <th >产品编号</th>
+                    <th >产品名称</th>
+                    <th >产品类别</th>
+                    <th >产品规格</th>
+                    <th >产品建议售价</th>
+                    <!--<th ></th>-->
+                    <!--<th >商机状态</th>-->
                     <!--<th >开户行</th>-->
                     <!--<th >审核状态</th>-->
                     <th>操作</th>
@@ -90,15 +88,23 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>36</td>
-                    <td >测试商机1</td>
-                    <td >小许</td>
-                    <td>小乖</td>
-                    <td>50%</td>
-                    <td>100000</td>
-                    <td>未签合同</td>
-                    <!--<td>中国工商银行</td>-->
-                    <!--<td>已审核</td>-->
+                <td>12</td>
+                <td >棉花糖</td>
+                <td >食品</td>
+                <td>个</td>
+                <td>5</td>
+                <td >
+                <!--<a style="margin-right: 15px;"  href="">修改密码</a>-->
+                <a style="margin-right: 15px;"  href="">编辑</a>
+                <a style="color: grey;" href="javascript: void(0)" onclick="deleteAction(this)">删除</a>
+                </td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td >杀毒软件</td>
+                    <td >软件</td>
+                    <td>个</td>
+                    <td>250</td>
                     <td >
                         <!--<a style="margin-right: 15px;"  href="">修改密码</a>-->
                         <a style="margin-right: 15px;"  href="">编辑</a>
@@ -106,15 +112,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>37</td>
-                    <td >测试商机2</td>
-                    <td >测试客户1</td>
-                    <td>测试联系人1</td>
-                    <td>60%</td>
-                    <td>500000</td>
-                    <td>未签合同</td>
-                    <!--<td>中国工商银行</td>-->
-                    <!--<td>已审核</td>-->
+                    <td>20</td>
+                    <td >陶瓷</td>
+                    <td >建筑</td>
+                    <td>件</td>
+                    <td>25</td>
                     <td >
                         <!--<a style="margin-right: 15px;"  href="">修改密码</a>-->
                         <a style="margin-right: 15px;"  href="">编辑</a>
@@ -122,15 +124,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>38</td>
-                    <td >测试商机3</td>
-                    <td >测试客户55</td>
-                    <td>测试联系人22</td>
-                    <td>75%</td>
-                    <td>20000</td>
-                    <td>未签合同</td>
-                    <!--<td>中国工商银行</td>-->
-                    <!--<td>已审核</td>-->
+                    <td>20</td>
+                    <td >洗洁精</td>
+                    <td >洗洁用品</td>
+                    <td>个</td>
+                    <td>10</td>
                     <td >
                         <!--<a style="margin-right: 15px;"  href="">修改密码</a>-->
                         <a style="margin-right: 15px;"  href="">编辑</a>
@@ -140,9 +138,9 @@
                 </tbody>
             </table>
             <ul class="pagination" style="position:relative;left:450px;top:25px">
-                <li><a href="#">«</a></li>
-                <li><a class="active" href="#">1</a></li>
-                <li><a href="#">»</a></li>
+            <li><a href="#">«</a></li>
+            <li><a class="active" href="#">1</a></li>
+            <li><a href="#">»</a></li>
             </ul>
             <!--<div id="navPage"></div>-->
         </div>

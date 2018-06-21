@@ -23,6 +23,12 @@ import io.swagger.annotations.ApiParam;
 @Controller
 @RequestMapping("/Customer")
 public class CustomerController {
+	private static final String CUSTOMERMANAGEMENT = "customerManagement";
+	
+	@RequestMapping(value="/customerManagementPage")
+	public String getUserManagementPage() {
+		return CUSTOMERMANAGEMENT;
+	}
 	
 	@Autowired
 	private CustomerService customerService;

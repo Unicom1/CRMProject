@@ -1,7 +1,7 @@
 .btnSpace{
     position:relative;
     top:70px;
-  //  right:120px;
+//  right:120px;
     margin-bottom:65px;
 }
 #addBtn{
@@ -26,4 +26,16 @@
     position: relative;
     top:20px;
     left:20px;
+}
+
+/*财务管理*/
+.finance{
+    position:relative;
+    right:300px;
+}
+
+/*办公管理*/
+.workLog{
+    position:relative;
+    right:150px;
 }
