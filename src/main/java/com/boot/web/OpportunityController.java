@@ -42,9 +42,11 @@ public class OpportunityController {
 			opportunityService.insertOpportunity(opportunity);
 			dynamicsService.insertDynamics(1, opportunity.getId());
 			jsonData.put("state",0);
+			jsonData.put("message", "新增商机成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonData.put("state",Utils.ERROR);
+			jsonData.put("message", "系统报错，请联系管理员");
 		}
 		return jsonData;
 	}
